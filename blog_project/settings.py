@@ -121,3 +121,13 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# 在qq邮箱-设置-账号-POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务-开启服务
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '1170860535@qq.com'
+EMAIL_HOST_PASSWORD = 'bwvjwwmaylsbheih'   # 服务的授权码
+DEFAULT_FROM_EMAIL = '1170860535@qq.com'

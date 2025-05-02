@@ -5,13 +5,37 @@ import random
 from django.core.mail import send_mail
 from .models import CaptchaModel
 from django.views.decorators.http import require_http_methods
-from .forms import RegisterForm
-from django.contrib.auth import get_user_model
+from .forms import RegisterForm, LoginForm
+from django.contrib.auth import get_user_model, login
 
 User = get_user_model()
 
-def login(request):
-    return render(request, 'login.html')
+@require_http_methods(['GET', 'POST'])
+def czlogin(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    else:
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            remember = form.cleaned_data.get('remember')
+            user = User.objects.filter(email=email).first()
+            if user and user.check_password(password):
+                # 登录
+                login(request, user)
+                # 判断是否需要记住我
+                if not remember:
+                    # 如果没有点击记住我，那么就要设置过期时间为0，即浏览器关闭后就会过期
+                    request.session.set_expiry(0)
+                # 如果点击了，那么就什么都不做，使用默认的2周的过期时间
+                return redirect('/')
+            else:
+                print('邮箱或密码错误！')
+                # form.add_error('email', '邮箱或者密码错误！')
+                # return render(request, 'login.html', context={"form": form})
+                # 重新刷新登录页面
+                return redirect(reverse('czauth:login'))
 
 
 @require_http_methods(['POST', 'GET'])

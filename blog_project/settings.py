@@ -53,16 +53,26 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "blog_project.urls"
 
+# 模版配置
 TEMPLATES = [
     {
+        # 指定使用 Django 自带的模板引擎
         "BACKEND": "django.template.backends.django.DjangoTemplates",
+        # 设置模板文件目录，这里指向项目根目录下的 templates 文件夹
         "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        # 允许 Django 在每个已安装的 app 中查找 templates 目录
         "APP_DIRS": True,
+        # 模板引擎的额外选项
         "OPTIONS": {
+            # 上下文处理器列表，用于向模板添加常用变量
             "context_processors": [
+                # 添加 debug 变量
                 "django.template.context_processors.debug",
+                # 添加request对象
                 "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
+                # 添加用户认证信息
+                "django.contrib.auth.context_processors.auth",    #判断用户状态，是否登录成功
+                # 添加消息框架功能
                 "django.contrib.messages.context_processors.messages",
             ],
             # 这里加载静态文件

@@ -26,10 +26,22 @@
                 <input type="search" class="form-control" placeholder="搜索..." aria-label="Search">
             </form>
 
-            <div class="text-end">
-                <button type="button" class="btn btn-outline-warning me-2">登录</button>
-                <button type="button" class="btn btn-warning">注册</button>
+            {% if user.is_authenticated %}
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{% static 'image/touxiang.jpg' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small" style="">
+                    <li><a class="dropdown-item" href="{% url 'czauth:logout' %}">退出登录</a></li>
+                </ul>
             </div>
+            {% else %}
+            <div class="text-end">
+                <a href="{% url 'czauth:login' %}" type="button" class="btn btn-outline-warning me-2">登录</a>
+                <a href="{% url 'czauth:register' %}" type="button" class="btn btn-warning">注册</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </header>

@@ -1,81 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>橙子博客</title>
-    <link rel="stylesheet" href="{% static 'bootstrap5/bootstrap.min.css' %}">
-    <script src="{% static 'bootstrap5/popper.min.js' %}"></script>
-    <script src="{% static 'bootstrap5/bootstrap.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-</head>
-<body>
-<header class="p-3 text-bg-light border-bottom mb-3">
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                <img src="{% static 'image/chengzi.jpg' %}" alt="" height="40">
-            </a>
+{% extends 'base.html' %}
 
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 text-secondary">首页</a></li>
-                <li><a href="#" class="nav-link px-2 text-secondary">发布博客</a></li>
-            </ul>
+{% block title %}首页{% endblock %}
 
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                <input type="search" class="form-control" placeholder="搜索..." aria-label="Search">
-            </form>
-
-            <div class="text-end">
-                <button type="button" class="btn btn-outline-warning me-2">登录</button>
-                <button type="button" class="btn btn-warning">注册</button>
+{% block main %}
+<h1>博客列表</h1>
+<div class="row row-cols-2 row-gap-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-header" style="background-color: rgba(255, 255, 224, 0.5);">
+                <a href="#">Django零基础到项目实战</a>
             </div>
-        </div>
-    </div>
-</header>
-
-<main class="container text-bg-light p-3">
-    <h1>博客列表</h1>
-    <div class="row row-cols-2 row-gap-4">
-        <div class="col">
-            <div class="card">
-                <div class="card-header" style="background-color: rgba(255, 255, 224, 0.5);">
-                    <a href="#">Django零基础到项目实战</a>
-                </div>
-                <div class="card-body" style="height: 100px;">
-                    <p class="card-text">零基础玩转Python Django5项目实战！</p>
-                </div>
-                <div class="card-footer text-body-secondary d-flex justify-content-between" style="background-color: rgba(255, 255, 224, 0.5);">
-                    <div>
-                        <img src="{% static 'image/touxiang.jpg' %}" alt="" class="rounded-circle" width="30" height="30">
-                        橙子
-                    </div>
-                    <div>
-                        发布时间：2025年05月01日 20:18
-                    </div>
-                </div>
+            <div class="card-body" style="height: 100px;">
+                <p class="card-text">零基础玩转Python Django5项目实战！</p>
             </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-header" style="background-color: rgba(255, 255, 224, 0.5);">
-                    <a href="#">Django项目实战blog</a>
+            <div class="card-footer text-body-secondary d-flex justify-content-between"
+                 style="background-color: rgba(255, 255, 224, 0.5);">
+                <div>
+                    <img src="{% static 'image/touxiang.jpg' %}" alt="" class="rounded-circle" width="30" height="30">
+                    橙子
                 </div>
-                <div class="card-body" style="height: 100px;">
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div class="card-footer text-body-secondary d-flex justify-content-between" style="background-color: rgba(255, 255, 224, 0.5);">
-                    <div>
-                        <img src="{% static 'image/touxiang.jpg' %}" alt="" class="rounded-circle" width="30" height="30">
-                        小陈
-                    </div>
-                    <div>
-                        发布时间：2025年05月02日 09:18
-                    </div>
+                <div>
+                    发布时间：2025年05月01日 20:18
                 </div>
             </div>
         </div>
     </div>
-</main>
-
-</body>
-</html>
+    <div class="col">
+        <div class="card">
+            <div class="card-header" style="background-color: rgba(255, 255, 224, 0.5);">
+                <a href="#">Django项目实战blog</a>
+            </div>
+            <div class="card-body" style="height: 100px;">
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer text-body-secondary d-flex justify-content-between"
+                 style="background-color: rgba(255, 255, 224, 0.5);">
+                <div>
+                    <img src="{% static 'image/touxiang.jpg' %}" alt="" class="rounded-circle" width="30" height="30">
+                    小陈
+                </div>
+                <div>
+                    发布时间：2025年05月02日 09:18
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

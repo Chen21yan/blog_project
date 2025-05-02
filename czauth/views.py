@@ -1,18 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.http.response import JsonResponse
 import string
 import random
 from django.core.mail import send_mail
 from .models import CaptchaModel
+from django.views.decorators.http import require_http_methods
+from .forms import RegisterForm
+from django.contrib.auth import get_user_model
 
-# Create your views here.
+User = get_user_model()
 
 def login(request):
     return render(request, 'login.html')
 
 
+@require_http_methods(['POST', 'GET'])
 def register(request):
-    return render(request, 'register.html')
+    if request.method == 'GET':
+        return render(request, 'register.html')
+    else:
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            User.objects.create_user(username=username, email=email, password=password)
+            return redirect(reverse('czauth:login'))
+        else:
+            print(form.errors)
+            # 重新跳转到注册页面
+            return redirect(reverse('czauth:register'))
+            # return render(request, 'register.html', context={'form': form})
 
 
 def send_email_captcha(request):

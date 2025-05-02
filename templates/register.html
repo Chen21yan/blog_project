@@ -11,6 +11,7 @@
 <div style="max-width: 330px;" class="m-auto">
     <h1>注册</h1>
     <form action="" method="POST">
+        {% csrf_token %}
         <div class="mb-3">
             <label>用户名</label>
             <input type="text" name="username" class="form-control" placeholder="用户名">

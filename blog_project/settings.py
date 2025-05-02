@@ -143,3 +143,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = '1170860535@qq.com'
 EMAIL_HOST_PASSWORD = 'bwvjwwmaylsbheih'   # 服务的授权码
 DEFAULT_FROM_EMAIL = '1170860535@qq.com'
+
+
+LOGIN_URL = '/auth/login'

@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from .models import CaptchaModel
 from django.views.decorators.http import require_http_methods
 from .forms import RegisterForm, LoginForm
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model, login, logout
 
 User = get_user_model()
 
@@ -36,6 +36,11 @@ def czlogin(request):
                 # return render(request, 'login.html', context={"form": form})
                 # 重新刷新登录页面
                 return redirect(reverse('czauth:login'))
+
+
+def czlogout(request):
+    logout(request)
+    return redirect('/')
 
 
 @require_http_methods(['POST', 'GET'])

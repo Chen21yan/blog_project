@@ -9,6 +9,23 @@ $(function(){
             }
             // 取消按钮的点击事件
             $this.off('click');
+
+            // 发送ajax请求
+            $.ajax('/auth/captcha?email='+email, {
+                method: 'GET',
+                success: function(result){
+                    if(result['code'] == 200){
+                        alert("验证码发送成功！");
+                    }else{
+                        alert(result['message']);
+                    }
+                },
+                fail: function (error){
+                    console.log(error);
+                }
+            })
+
+
             // 倒计时
             let countdown = 6;
             let timer = setInterval(function(){

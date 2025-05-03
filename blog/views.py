@@ -23,15 +23,17 @@ def blog_detail(request, blog_id):
 def pub_blog(request):
     if request.method == 'GET':
         categories = BlogCategory.objects.all()
-        return render(request, 'pub_blog.html', context={'categories': categories})
+        return render(request, 'pub_blog.html', context={"categories": categories})
     else:
         form = PubBlogForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data.get('title')
             content = form.cleaned_data.get('content')
             category_id = form.cleaned_data.get('category')
-            Blog.objects.create(title=title, content=content, category_id=category_id, author=request.user)
-            return JsonResponse({"code": 200, "message": "博客发布成功！"})
+            blog = Blog.objects.create(title=title, content=content, category_id=category_id, author=request.user)
+            return JsonResponse({"code": 200, "message": "博客发布成功！", "data": {"blog_id": blog.id}})
         else:
-            print(form.errors)
+            print("提交的 POST 数据:", request.POST)
+            print("content 值:", request.POST.get('content'))
+            print("表单错误:", form.errors)
             return JsonResponse({"code": 400, "message": "参数错误！"})

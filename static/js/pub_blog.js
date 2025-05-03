@@ -2,10 +2,10 @@ window.onload = function () {
     const {createEditor, createToolbar} = window.wangEditor
 
     const editorConfig = {
-        placeholder: 'Type here...',
+        placeholder: '请输入博客内容...',
         onChange(editor) {
             const html = editor.getHtml()
-            console.log('editor content', html)
+            console.log('编辑器内容变化:', html)
             // 也可以同步到 <textarea>
         }
     }
@@ -26,27 +26,28 @@ window.onload = function () {
         mode: 'default', // or 'simple'
     })
 
-//    $("#submit-btn").click(function(event){
-//        // 阻止按钮的默认行为
-//        event.preventDefault();
-//
-//        let title = $("input[name='title']").val();
-//        let category = $("#category-select").val();
-//        let content = editor.getHtml();
-//        let csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
-//        $.ajax('/blog/pub', {
-//            method: 'POST',
-//            data: {title, category, content, csrfmiddlewaretoken},
-//            success: function(result){
-//                if(result['code'] == 200){
-//                    // 获取博客id
-//                    let blog_id = result['data']['blog_id']
-//                    // 跳转到博客详情页面
-//                    window.location = '/blog/detail/' + blog_id
-//                }else{
-//                    alert(result['message']);
-//                }
-//            }
-//        })
-//    });
+    $("#submit-btn").click(function(event){
+        // 阻止按钮的默认行为
+        event.preventDefault();
+
+        let title = $("input[name='title']").val();
+        let category = $("#category-select").val();
+        // getText()只获得文本，没有样式
+        let content = editor.getHtml();
+        let csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+        $.ajax('/blog/pub', {
+            method: 'POST',
+            data: {title, category, content, csrfmiddlewaretoken},
+            success: function(result){
+                if(result['code'] == 200){
+                    // 获取博客id
+                    let blog_id = result['data']['blog_id']
+                    // 跳转到博客详情页面
+                    window.location = '/blog/detail/' + blog_id
+                }else{
+                    alert(result['message']);
+                }
+            }
+        })
+    });
 }

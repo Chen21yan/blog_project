@@ -11,7 +11,11 @@ def index(request):
     return render(request, 'index.html')
 
 def blog_detail(request, blog_id):
-    return render(request, 'blog_detail.html')
+    try:
+        blog = Blog.objects.get(pk=blog_id)
+    except Exception as e:
+        blog = None
+    return render(request, 'blog_detail.html', context={'blog': blog})
 
 # 装饰器，用于限制只有已登录用户才能访问pub_blog视图函数。如果用户未登录，则会被重定向到指定
 # @login_required(login_url=reverse_lazy("czauth:login"))  #

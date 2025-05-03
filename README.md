@@ -7,6 +7,7 @@ Django 项目配置与数据库修改流程
 在 blog_project/blog_project/settings.py 中添加或修改以下配置：
 
 `EMAIL_HOST_USER = 'your_email@qq.com'  # 你的QQ邮箱
+
 EMAIL_HOST_PASSWORD = 'your_authorization_code'  # 邮箱授权码（非登录密码）`
 
 1.2 如何获取QQ邮箱授权码？

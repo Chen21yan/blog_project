@@ -3,47 +3,29 @@
 {% block title %}首页{% endblock %}
 
 {% block main %}
-<h1>博客列表</h1>
-<div class="row row-cols-2 row-gap-4">
-    <div class="col">
-        <div class="card">
-            <div class="card-header" style="background-color: rgba(255, 255, 224, 0.5);">
-                <a href="#">Django零基础到项目实战</a>
-            </div>
-            <div class="card-body" style="height: 100px;">
-                <p class="card-text">零基础玩转Python Django5项目实战！</p>
-            </div>
-            <div class="card-footer text-body-secondary d-flex justify-content-between"
-                 style="background-color: rgba(255, 255, 224, 0.5);">
-                <div>
-                    <img src="{% static 'image/touxiang.jpg' %}" alt="" class="rounded-circle" width="30" height="30">
-                    橙子
+    <h1>博客列表</h1>
+    <div class="row row-cols-2 row-gap-4">
+        {% for blog in blogs %}
+        <div class="col">
+            <div class="card">
+                <div class="card-header" style="background-color: rgba(255, 255, 224, 0.5);">
+                    <a href="{% url 'blog:blog_detail' blog_id=blog.id %}">{{ blog.title }}</a>
                 </div>
-                <div>
-                    发布时间：2025年05月01日 20:18
+                <div class="card-body" style="height: 100px;">
+                    <p class="card-text">{{ blog.content|striptags|truncatechars:200 }}</p>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <div class="card-header" style="background-color: rgba(255, 255, 224, 0.5);">
-                <a href="#">Django项目实战blog</a>
-            </div>
-            <div class="card-body" style="height: 100px;">
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer text-body-secondary d-flex justify-content-between"
-                 style="background-color: rgba(255, 255, 224, 0.5);">
-                <div>
-                    <img src="{% static 'image/touxiang.jpg' %}" alt="" class="rounded-circle" width="30" height="30">
-                    小陈
-                </div>
-                <div>
-                    发布时间：2025年05月02日 09:18
+                <div class="card-footer text-body-secondary d-flex justify-content-between"
+                     style="background-color: rgba(255, 255, 224, 0.5);">
+                    <div>
+                        <img src="{% static 'image/touxiang.jpg' %}" alt="" class="rounded-circle" width="30" height="30">
+                        {{ blog.author.username }}
+                    </div>
+                    <div>
+                        发布时间{{ blog.pub_time|date:"Y-m-d H:i " }}
+                    </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-</div>
 {% endblock %}
